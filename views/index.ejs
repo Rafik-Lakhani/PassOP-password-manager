@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password storage tool | LR</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="h-full min-h-screen w-full bg-green-100 relative">
+        <nav class="w-full h-12 bg-slate-800 text-white flex justify-around gap-x-24 items-center">
+            <div class="left text-2xl font-bold">
+                <h1><span class="text-green-700 ">
+                        <</span>Pass<span class="text-green-700">OP/></span></h1>
+            </div>
+            <div
+                class="right w-[35px] bg-green-800 h-[35px] border-white border-2 rounded-full flex items-center justify-center">
+                <h1>
+                    <% if(email==""){%>
+                        <a href="/login"><i class="ri-user-3-fill text-xl"></i></a>
+                   <% }else{%>
+                    <a href="/profile/<%=email%>" class="text-2xl"><%=email.toUpperCase().substr(0,1)%></a>
+                    <% } %>
+                </h1>
+            </div>
+        </nav>
+        <main class=" w-full flex justify-center items-center flex-col">
+            <div class="bg-green-100 h-full w-3/5 p-14 flex  gap-6 flex-col">
+                <div class="text-3xl font-bold">
+                    <h1 class="text-center"><span class="text-green-500 ">
+                            <</span>Pass<span class="text-green-500">OP/></span></h1>
+                    <h3 class="text-base font-semibold text-center">Your Own Password Manager</h3>
+                </div>
+                <div class="input-sec w-full ">
+                    <form action="/save" method="post" class="w-full flex flex-col gap-4">
+                        <input type="text" name="sideurl" placeholder="Enter Website URL "
+                            class="w-full rounded-[20px] px-2 border-2 border-green-500">
+                        <div class="flex w-full gap-6 relative">
+                            <input type="text" name="sideun" required placeholder="Enter Username"
+                                class="w-3/4 rounded-[20px] px-2 border-green-500 border-2">
+                            <input type="password" name="sidepw"  required placeholder=" Enter Password"
+                                class="w-1/4 rounded-[20px] px-2 border-green-500 border-2" id="pw0">
+                            <i class="ri-eye-fill absolute right-[5px] top-[1px] text-green-800" onclick="pwshow(0)"></i>
+                        </div>
+                        <input type="submit" value="Save"
+                            class=" bg-green-500 w-[80px] h-10 mt-[10px]  text-center m-auto  text-[20px] rounded-full border-2 border-zinc-900">
+                    </form>
+                </div>
+
+                <% if(data.length==0) {%>
+                    <h1>NO PASSWORD STORE</h1>
+                <% }else{ %>
+                    <div class="password-sec text-white ">
+                    <h1 class="text-xl font-bold mb-[8px] text-black">Your Passwords</h1>
+                    <div class="passtable flex flex-col w-full rounded-lg overflow-hidden mb-20">
+                        <div class="tdheading bg-green-700 w-full h-8  flex items-center my-auto ">
+                            <div class="sideurl w-2/4 flex justify-center items-center my-auto">
+                                <span class="text-white">Site</span>
+                            </div>
+                            <div class="otherheading h-full w-2/4 h-8 flex">
+                                <span class="w-2/5 flex justify-center items-center h-full my-auto">Username</span>
+                                <span class="w-2/5 flex justify-center items-center h-full my-auto">Password</span>
+                                <span class="w-2/5 flex justify-center items-center h-full my-auto">Actions</span>
+                            </div>
+                        </div>
+
+
+                        <!-- here all password show -->
+                         <% let i=1; %>
+                        <% data.forEach(element => { %>
+                            <div class="tdheading bg-green-200 w-full h-8 text-black flex items-center my-auto ">
+                                <div class="sideurl w-2/4 flex justify-center items-center my-auto">
+                                    <span class="text-black"><%=element.siteurl%></span>
+                                </div>
+                                <div class="otherheading h-full w-2/4 h-8 flex">
+                                    <span class="w-2/5 flex justify-center items-center h-full my-auto"><%=element.usernm%></span>
+                                    <span class="w-4/5 flex justify-center items-center h-full my-auto gap-2">
+                                        <input type="password" value="<%=element.sitepw%>" id="pw<%=i%>" class="w-2/5 
+                                        bg-transparent">
+                                        <button class="bg-transparent h-full" onclick="pwshow(<%=i%>)">
+                                        <i class="ri-eye-fill"></i></button>
+                                    </span>
+                                    <span class="w-2/5 flex justify-center items-center h-full my-auto gap-2">
+                                        <a href="/edit/<%=element.usernm%>"><i class="ri-edit-fill"></i></a>
+                                        <a href="/delete/<%=element.usernm%>"><i class="ri-delete-bin-5-line"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        <% i++; }); %>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+                <% } %>
+                
+
+            <div class="footer flex flex-col h-16 w-full left-0 bg-slate-800 items-center absolute bottom-0">
+                <div class="text-2xl font-bold text-white">
+                    <h1><span class="text-green-700 ">
+                            <</span>Pass<span class="text-green-700">OP/></span></h1>
+                </div>
+                <h1 class="text-white">Create by LR <a href="https://github.com/Rafik-Lakhani"><i class="ri-github-fill text-xl ml-2"></i></a></h1>
+            </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        function pwshow(i){
+            let input =document.getElementById(`pw${i}`);
+            if(input.type=="password") input.type="text";
+            else input.type="password";
+        }
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password storage tool | LR</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="main bg-green-100 min-h-screen w-full flex flex-col ">
+        <div class="flex justify-between p-4 px-8 w-full bg-slate-800 text-white">
+            <div class="left text-2xl font-bold">
+                <h1><span class="text-green-700 ">
+                        <</span>Pass<span class="text-green-700">OP/></span></h1>
+            </div>
+            <h1 class=""><a href="/">Home</a></h1>
+        </div>
+        <div class="flex flex-col p-6 h-[450px] w-full">
+            <h1 class="text-3xl font-bold text-green-800 mb-6">Your Profile</h1>
+
+            <h6 class="text-green-700">Name</h6>
+            <h1 class="text-3xl font-bold mt-1 text-green-800"><%=name%></h1>
+            <hr class="w-full bg-green-800 min-h-[3px]">
+
+            <h6 class="text-green-700 mt-4">Email</h6>
+            <h1 class="text-3xl font-bold mt-1 text-green-800"><%=email%></h1>
+            <hr class="w-full bg-green-800 min-h-[3px]">
+            
+            <h6 class="text-green-700 mt-4">Date of join</h6>
+            <h1 class="text-3xl font-bold mt-1 text-green-800"><%=date.toString().substr(0,15)%></h1>
+            <hr class="w-full bg-green-800 min-h-[3px]">
+            <div class="btn h-12 mt-6">
+            <button class="bg-green-800 w-16 h-8 text-white  rounded-lg ml-2 hover:bg-green-500"><a href="/">Done</a></button>
+            <button class="bg-green-800 w-16 h-8 ml-6 text-white rounded-lg  hover:bg-green-500"><a href="/logout">Logout</a></button>
+            </div>
+     </div>
+    </div>
+</body>
+</html>
