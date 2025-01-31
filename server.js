@@ -2,13 +2,13 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const nodemailer=require("nodemailer");
 const CryptoJS = require("crypto-js")
 const userdb = require("./model/userlogindb");
 const pwdb = require("./model/pwdb");
 const http = require("http");
 const httpserver = require("./httpserver");
 const dotenv = require("dotenv");
+const path = require('path');
 
 httpserver.listen(8000,function(){console.log("http server running in 8000 port")})
 
@@ -22,6 +22,8 @@ var userotp = {};
 var timeout = false;
 app.use(cookieParser());
 app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
 
