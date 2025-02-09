@@ -25,8 +25,13 @@
 
                <%   if(from!="login"){%>
                   <form action= "/verifyemail?em=<%=email%>" class="w-full flex flex-col items-center gap-2" method="post"> 
+                      <input type="hidden" name="username" value="<%=userdata.name%>" hidden>
+                      <input type="hidden" name="email" value="<%=email%>" hidden>
+                      <input type="hidden" name="password" value="<%=userdata.password%>" hidden>
                 <% }else{ %>
                     <form action="/loginemailverify?email=<%=email%>" class="w-full flex flex-col items-center gap-2" method="post">
+                         <input type="hidden" name="email" value="<%=email%>" hidden>
+                         <input type="hidden" name="password" value="<%=password%>" hidden>
                  <% } %>   
                 <input type="number" name="otp" placeholder="Enter OTP" class="w-4/5 px-2 py-1 border-2 border-green-500 rounded-[20px]" maxlength="6" required>
                 <input type="submit" value="Submit"

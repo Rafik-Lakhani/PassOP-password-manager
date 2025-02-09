@@ -14,7 +14,7 @@
         <nav class="w-full h-12 bg-slate-800 text-white flex justify-around gap-x-24 items-center">
             <div class="left text-2xl font-bold">
                 <h1><span class="text-green-700 ">
-                        <</span>Pass<span class="text-green-700">OP/></span></h1>
+                        </span>< Pass<span class="text-green-700">OP/></span></h1>
             </div>
             <div
                 class="right w-[35px] bg-green-800 h-[35px] border-white border-2 rounded-full flex items-center justify-center">
@@ -31,7 +31,7 @@
             <div class="bg-green-100 h-full w-3/5 p-14 flex  gap-6 flex-col">
                 <div class="text-3xl font-bold">
                     <h1 class="text-center"><span class="text-green-500 ">
-                            <</span>Pass<span class="text-green-500">OP/></span></h1>
+                            </span>< Pass<span class="text-green-500">OP/></span></h1>
                     <h3 class="text-base font-semibold text-center">Your Own Password Manager</h3>
                 </div>
                 <div class="input-sec w-full ">
@@ -51,7 +51,7 @@
                 </div>
 
                 <% if(data.length==0) {%>
-                    <h1>NO PASSWORD STORE</h1>
+                    <h1 class="text-xl text-center">NO PASSWORD STORE</h1>
                 <% }else{ %>
                     <div class="password-sec text-white ">
                     <h1 class="text-xl font-bold mb-[8px] text-black">Your Passwords</h1>
@@ -77,15 +77,15 @@
                                 </div>
                                 <div class="otherheading h-full w-2/4 h-8 flex">
                                     <span class="w-2/5 flex justify-center items-center h-full my-auto"><%=element.usernm%></span>
-                                    <span class="w-4/5 flex justify-center items-center h-full my-auto gap-2">
-                                        <input type="password" value="<%=element.sitepw%>" id="pw<%=i%>" class="w-2/5 
+                                    <span class="w-4/5 flex justify-center items-center h-full my-auto gap-1">
+                                        <input type="password" value="<%=element.sitepw%>" id="pw<%=i%>" class="w-1/5 
                                         bg-transparent">
                                         <button class="bg-transparent h-full" onclick="pwshow(<%=i%>)">
                                         <i class="ri-eye-fill"></i></button>
                                     </span>
                                     <span class="w-2/5 flex justify-center items-center h-full my-auto gap-2">
-                                        <a href="/edit/<%=element.usernm%>"><i class="ri-edit-fill"></i></a>
-                                        <a href="/delete/<%=element.usernm%>"><i class="ri-delete-bin-5-line"></i></a>
+                                        <a href="/edit/<%=element._id%>"><i class="ri-edit-fill"></i></a>
+                                        <a href="/delete/<%=element._id%>"><i class="ri-delete-bin-5-line"></i></a>
                                     </span>
                                 </div>
                             </div>
