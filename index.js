@@ -105,7 +105,7 @@ async function emailsender(email, otp) {
             from: '"</passOP>" <lakhanirafik111@gmail.com>', // sender address
             to: `${email}`, // list of receivers
             subject: "OTP verification", // Subject line
-            text: `<div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 30px;">
+            html: `<div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 30px;">
   <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
     <h2 style="color: #333333; text-align: center;">Thank You for Choosing <span style="color: #4A90E2;">&lt;/passOP&gt;</span> Password Manager</h2>
 
