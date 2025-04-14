@@ -48,6 +48,14 @@ app.get("/", async (req, res) => {
 
 app.post("/save", async (req, res) => {
     try {
+        if (!req.cookies.token) {
+            res.redirect("/login?message=please login first");
+            return false;
+        }
+        if (!req.body.sideurl || !req.body.sideun || !req.body.sidepw) {
+            res.redirect("/?message=please fill all the fields");
+            return false;
+        }
         let usersv;
         var userem = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
         if (typeof (userem) === "string") {
