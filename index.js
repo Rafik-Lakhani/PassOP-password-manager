@@ -89,35 +89,57 @@ function otpgenerator() {
 }
 
 async function emailsender(email, otp) {
-    const transporter = await nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-            user: process.env.SEND_EMAIL_ADDRESS,
-            pass: process.env.SEND_EMAIL_PASSWORD,
-        },
-    });
-    const info = await transporter.sendMail({
-        from: '"</passOP>" <lakhanirafik111@gmail.com>', // sender address
-        to: `${email}`, // list of receivers
-        subject: "OTP verification", // Subject line
-        text: `
-      Thank you for choosing </passOP> Password Manager.
-  
-      To complete your verification process, please use the One-Time Password (OTP) provided below. This code is valid for the next 1 minutes.
-  
-      Your OTP Code: ${otp}
-  
+    try {
+
+
+        const transporter = await nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.SEND_EMAIL_ADDRESS,
+                pass: process.env.SEND_EMAIL_PASSWORD,
+            },
+        });
+        const info = await transporter.sendMail({
+            from: '"</passOP>" <lakhanirafik111@gmail.com>', // sender address
+            to: `${email}`, // list of receivers
+            subject: "OTP verification", // Subject line
+            text: `<div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 30px;">
+  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+    <h2 style="color: #333333; text-align: center;">Thank You for Choosing <span style="color: #4A90E2;">&lt;/passOP&gt;</span> Password Manager</h2>
+
+    <p style="font-size: 16px; color: #555555;">
+      To complete your verification process, please use the One-Time Password (OTP) provided below. This code is valid for the next <strong>1 minute</strong>.
+    </p>
+
+    <div style="text-align: center; margin: 30px 0;">
+      <span style="display: inline-block; background-color: #4A90E2; color: white; font-size: 24px; padding: 10px 20px; border-radius: 5px; letter-spacing: 4px;">
+        ${otp}
+      </span>
+    </div>
+
+    <p style="font-size: 16px; color: #555555;">
       If you did not request this code, please ignore this email or contact our support team immediately.
-  
-      For your security, do not share this OTP with anyone.
-  
-      Thank you,
-      </passOP> Support Team
-        `, // plain text body
-    });
-    return info;
+    </p>
+
+    <p style="font-size: 16px; color: #d9534f;">
+      <strong>For your security, do not share this OTP with anyone.</strong>
+    </p>
+
+    <p style="font-size: 16px; color: #555555;">
+      Thank you,<br />
+      <strong>&lt;/passOP&gt; Support Team</strong>
+    </p>
+  </div>
+</div>
+` // plain text body
+        });
+        return info;
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
 }
 
 app.get("/register", (req, res) => {
@@ -189,7 +211,7 @@ app.post("/loginuser", async (req, res) => {
     let pwuser = await userdb.findOne({ email: useremail });
     const otp = otpgenerator();
 
-    if (pwuser != "undefine") {
+    if (pwuser) {
         bcrypt.compare(req.body.password, pwuser.password, async (err, result) => {
             if (result) {
                 let info = await emailsender(useremail, otp);
