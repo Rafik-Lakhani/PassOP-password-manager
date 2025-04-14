@@ -80,9 +80,6 @@ function otpgenerator() {
     return Math.floor(100000 + Math.random() * 900000);
 }
 
-
-
-
 async function emailsender(email, otp) {
     const transporter = await nodemailer.createTransport({
         host: "smtp.gmail.com",
