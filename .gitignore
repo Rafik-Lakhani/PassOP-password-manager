@@ -1,2 +1,77 @@
+
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Environment variables and secrets
 .env
-node_modules
+.env.*
+!.env.example
+
+# Build output
+dist/
+build/
+.next/
+out/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+.vite/
+.turbo/
+
+# Testing
+coverage/
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE and editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Runtime files
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Deployment
+.vercel/
+.netlify/
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional: React Native
+.expo/
+
+# Optional: Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
